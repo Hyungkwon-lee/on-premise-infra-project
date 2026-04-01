@@ -1,75 +1,72 @@
-# on-premise-infra-project
-1. 개요
-온프레미스 인프라 환경에서 네트워크 장비(라우터/스위치)의
-관리자 인증을 중앙에서 통제하기 위해 RADIUS 서버를 구축하였다.
+# On-Premise Infrastructure Project
 
-기존에는 장비별 로컬 계정을 사용하여 관리했기 때문에
-계정 관리 및 보안 통제가 어려운 문제가 존재했다.
+## 1. 프로젝트 개요
 
-2. 문제 상황
-네트워크 장비마다 로컬 계정 개별 관리
-관리자 권한 통제 어려움
-접근 로그 중앙 관리 불가
-보안 감사 대응 어려움
+기업의 본사(HQ)와 지사(Branch) 간 네트워크를 구성하고  
+안정적인 서비스 운영을 위한 Legacy 인프라를 구축하는 프로젝트입니다.
 
-3. 해결 방법
+본 프로젝트는 네트워크 인프라 설계를 기반으로 진행되었으며,  
+여기에 서버 운영 및 보안 요소를 추가하여  
+**실제 운영 환경을 고려한 인프라 구조를 구현**하였습니다.
 
-RADIUS 기반 AAA(Authentication, Authorization, Accounting) 구조를 적용하여
-중앙 인증 시스템을 구축
+---
 
-4. 주요 설정
-- 주요 구성
-RADIUS 서버: 192.168.20.12
-네트워크 장비: Router / L3 Switch
-인증 방식: ID / Password 기반 + 권한 제어
+## 2. 프로젝트 시나리오
 
+- 본사와 지사를 VPN으로 연결하여 내부망 통신 구성
+- 사용자 및 관리자는 네트워크 장비 및 서버에 접근
+- 서버는 WEB / LB / 인증 시스템 등 역할 수행
+- 중앙 인증 및 접근 통제를 통해 보안 강화
 
-네트워크 장비 설정 (Cisco)
-aaa new-model
+👉 단순 네트워크 연결이 아닌  
+👉 **운영 + 보안을 포함한 인프라 환경 구성**
 
-aaa group server radius RADIUS_GROUP
- server 192.168.20.12 auth-port 1812 acct-port 1813
+---
 
-aaa authentication login RAD_AUTH group RADIUS_GROUP local
-aaa authorization exec RAD_AUTH group RADIUS_GROUP local
-aaa accounting exec RAD_ACCT start-stop group RADIUS_GROUP
+## 🏗 3. 주요 구성
 
-radius-server host 192.168.20.12 auth-port 1812 acct-port 1813 key admin123
+### 네트워크
+- Router / L3 Switch 기반 구조
+- VLAN을 통한 네트워크 분리
+- OSPF 기반 라우팅
+- VPN(GRE over IPsec) 구성
+- ZBFW 기반 방화벽 세팅(구현 중)
 
-ip radius source-interface Vlan20
+### 서버
+- WEB 서버
+- Load Balancer 서버
+- RADIUS 인증 서버 (DB 및 NTP 포함)
+- SNMP 서버 (LibreNMS)
+- DNS / DHCP
 
-line vty 0 4
- login authentication RAD_AUTH
- transport input ssh
+---
 
- RADIUS 서버 설정
- # /etc/raddb/clients.conf
-client HQ-DSW3 {
- ipaddr = 192.168.20.4
- secret = admin123
-}
+## 👨‍💻 4. 담당 역할
 
-# /etc/raddb/users
-testuser Cleartext-Password := "testpass"
- Service-Type = Login-User,
- Cisco-AVPair = "shell:priv-lvl=15"
+- 프로젝트 리더
+- 토폴로지 구성
+- RADIUS 기반 중앙 인증 시스템 구축
+- SSH Key 기반 접근 통제 설계
+- WEB / LB 서버 구축 및 운영
+- 보안 정책 적용 (취약점 점검 기준 기반)
 
- 5. 결과
-네트워크 장비 관리자 인증을 중앙 서버로 통합
-사용자별 권한(Level 15) 제어 가능
-인증 및 접근 로그 기록 가능
-보안 정책 일관성 확보
+👉 네트워크 환경 위에  
+👉 **서버 운영 및 보안 체계 구축 담당**
 
-. 트러블슈팅
-❗ 문제: RADIUS 인증은 되지만 권한이 적용되지 않음
-원인:
-사용자 privilege level 설정 누락
-해결:
-RADIUS 서버에서 Cisco-AVPair = "shell:priv-lvl=15" 추가
-결과:
-관리자 권한 정상 적용
+---
 
-7. 배운 점
-AAA 구조를 통해 인증 / 인가 / 로그를 분리할 수 있음을 이해
-네트워크 장비 보안에서 중앙 인증의 중요성 체감
-실제 운영 환경에서 계정 관리 방식 설계 경험 확보
+## 5. 핵심 기술 (요약)
+
+### RADIUS 기반 중앙 인증
+- 네트워크 장비 인증 통합
+- DB 기반 계정 관리 구조 적용
+- 장비별 권한 문제 해결 경험
+
+👉 [상세 보기](./configs/radius.md)
+
+---
+
+## 🚧 6. 진행 상태
+
+- 프로젝트 진행 중 (약 70%)
+- 현재 보안 정책 및 운영 안정화 작업 진행 중
