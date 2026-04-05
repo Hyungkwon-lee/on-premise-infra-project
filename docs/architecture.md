@@ -25,14 +25,11 @@
 
 ## 토폴로지
 
-## 설계 의도
-
-- HQ 이중화 (HSRP + LACP)
-- Branch 안정적인 VPN 연결
-- 중앙 인증 기반 보안 구조 적용
-
 ![Topology](./topology.png)
 
+---
+
+## 설계 의도
 - HQ / Branch 구조 기반 온프레미스 인프라
 - VPN(GRE over IPSEC) 기반 지사 연결
 - HSRP + LACP 기반 이중화 구성
