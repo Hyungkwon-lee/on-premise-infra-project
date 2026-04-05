@@ -97,7 +97,7 @@ HQ-Branch 구조 기반 온프레미스 인프라 설계
 
 ### HQ ↔ Branch 통신 문제
 - 지사 → 본사 트래픽은 정상이나, 본사 → 지사 접속 불가
-- 원인: Ghost in the Machine 으로 판단 중
+- 원인: Ghost in the Machine 으로 판단
 - 1차 조치: ACL에 ip any any 추가 / class class default - pass 추가 후 확인 - 10분 뒤 부터 정상 작동 시작
 - 해결: 1차 조치 설정 역순으로 진행 - 정상작동 확인
 
