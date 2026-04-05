@@ -25,3 +25,8 @@
 
 ## 토폴로지
 ![Topology](./topology.png)
+
+- HQ / Branch 구조 기반 온프레미스 인프라
+- VPN(GRE over IPSEC) 기반 지사 연결
+- HSRP + LACP 기반 이중화 구성
+- RADIUS 기반 중앙 인증 시스템 적용
