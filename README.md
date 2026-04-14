@@ -4,7 +4,7 @@
 
 ## 📊 발표 자료
 
-- [프로젝트 발표 자료 PDF](ppt/on-premise-infra-presentation.pdf)
+- [프로젝트 발표 자료 PDF](on-premise-infra-presentation.pdf)
 
 ---
 
