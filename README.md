@@ -1,5 +1,13 @@
 # On-Premise Infrastructure Project
 
+본 프로젝트에서 저는 RADIUS 기반 인증 시스템과 접근 통제, 웹 서비스 구성을 중심으로 인프라 운영 및 보안 영역을 담당하였습니다.
+
+## 📊 발표 자료
+
+- [프로젝트 발표 자료 PDF](ppt/on-premise-infra-presentation.pdf)
+
+---
+
 ## 1. 프로젝트 개요
 
 기업의 본사(HQ)와 지사(Branch) 간 네트워크를 구성하고  
@@ -67,29 +75,36 @@
 
 ---
 
-## 6. 핵심 기술 (요약)
+## 6 주요 구현 내용
 
-## 인프라 아키텍처
+### 인프라 아키텍처
 
 HQ-Branch 구조 기반 온프레미스 인프라 설계
 
 👉 [아키텍처 상세 보기](./docs/architecture.md)
 
-##  RADIUS 기반 중앙 인증 시스템
-
-- FreeRADIUS 기반 인증 구축
-- DB 연동을 통한 계정 관리 구조 개선
-- L2 스위치 권한 문제 발생 → VTY 권한으로 해결
+### 1. RADIUS 기반 중앙 인증 시스템 구축
+- FreeRADIUS를 활용한 네트워크 장비 인증 중앙화
+- AAA(Authentication, Authorization, Accounting) 구조 적용
+- 장비별 인증 정책 구성
 
 👉 [상세 보기](./configs/radius.md)
 
-## SSH 접근 통제
-
-- Key 기반 인증 적용
-- root 로그인 제한
-- 패스워드 인증 비활성화
+### 2. SSH Key 기반 접근 통제
+- 패스워드 인증 제거 및 Key 기반 인증 적용
+- 관리자 접근 통제 정책 구성
+- SSH Key 자동 배포 스크립트 적용
 
 👉 [상세 보기](./configs/ssh.md)
+
+### 3. WEB / Load Balancer 구성
+- 다중 WEB 서버 기반 서비스 구성
+- 트래픽 분산 구조 적용
+
+### 4. 보안 정책 적용
+- 내부망 / 외부망 접근 통제
+- 관리자 전용 접근 정책 구성
+- 정보보안
 
 ---
 
@@ -99,6 +114,13 @@ HQ-Branch 구조 기반 온프레미스 인프라 설계
 - 인증(Authentication)은 성공했지만 권한(Authorization)이 적용되지 않음
 - 원인: L2 장비의 권한 처리 방식 차이
 - 해결: VTY 라인 privilege 설정 적용
+
+### RADIUS DB 암호화 인증 문제
+
+- DB에 암호화된 비밀번호를 저장한 이후 RADIUS 인증이 실패
+- 원인: 비밀번호 해시 방식과 RADIUS 인증 방식이 일치하지 않아 비교 불가
+- 해결: SHA-512($6$) 기반 해시로 통일하고 RADIUS 설정을 맞춰 인증 정상화
+
 
 ### HQ ↔ Branch 통신 문제
 - 지사 → 본사 트래픽은 정상이나, 본사 → 지사 접속 불가
