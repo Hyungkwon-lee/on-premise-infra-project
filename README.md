@@ -83,21 +83,25 @@
 
 HQ-Branch 구조 기반 온프레미스 인프라 설계
 
-👉 [아키텍처 상세 보기](./docs/architecture.md)
+👉 [아키텍처 상세 보기]
+  - (./docs/architecture.md)
 
 ### 1. RADIUS 기반 중앙 인증 시스템 구축
 - FreeRADIUS를 활용한 네트워크 장비 인증 중앙화
 - AAA(Authentication, Authorization, Accounting) 구조 적용
 - 장비별 인증 정책 구성
 
-👉 [상세 보기](./configs/radius.md)
+👉 [상세 보기]
+  - RADIUS 구축 가이드: [radius-manual.md](docs/radius-manual.md)
+  - RADIUS 설정 및 트러블슈팅: [configs/radius.md](configs/radius.md)
 
 ### 2. SSH Key 기반 접근 통제
 - 패스워드 인증 제거 및 Key 기반 인증 적용
 - 관리자 접근 통제 정책 구성
 - SSH Key 자동 배포 스크립트 적용
 
-👉 [상세 보기](./configs/ssh.md)
+👉 [상세 보기]
+  - (./configs/ssh.md)
 
 ### 3. WEB / Load Balancer 구성
 - 다중 WEB 서버 기반 서비스 구성
