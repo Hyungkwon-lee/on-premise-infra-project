@@ -91,8 +91,8 @@ HQ-Branch 구조 기반 온프레미스 인프라 설계
 - 장비별 인증 정책 구성
 
 👉 [상세 보기]
-  - RADIUS 구축 가이드: [radius-manual.md](docs/radius-manual.md)
-  - RADIUS 설정 및 트러블슈팅: [configs/radius.md](configs/radius.md)
+  - [RADIUS 구축 가이드](docs/radius-manual.md)
+  - [RADIUS 설정 및 트러블슈팅](configs/radius.md)
 
 ### 2. SSH Key 기반 접근 통제
 - 패스워드 인증 제거 및 Key 기반 인증 적용
