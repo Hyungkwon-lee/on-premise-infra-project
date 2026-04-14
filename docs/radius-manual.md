@@ -122,3 +122,6 @@ Access-Accept
 * Cleartext-Password: 평문 비교 방식
 * Crypt-Password: 해시 기반 비교 방식
 * 인증(Authentication)과 권한(Authorization)은 별도로 동작함
+
+---  
+※ 실제 설정 및 트러블슈팅 내용은 configs/radius.md 문서를 참고
