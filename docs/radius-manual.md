@@ -65,13 +65,13 @@ vi /etc/raddb/mods-enabled/sql
 
 다음 항목 수정:
 
+```
 * driver = "rlm_sql_mysql"
 * server = "localhost"
 * login = "radius"
 * password = "password"
 * radius_db = "radius"
-
-````
+```
 
 ---
 
