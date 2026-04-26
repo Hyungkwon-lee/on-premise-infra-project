@@ -2,7 +2,11 @@
 
 본 프로젝트에서 저는 RADIUS 기반 인증 시스템과 접근 통제, 웹 서비스 구성을 중심으로 인프라 운영 및 보안 영역을 담당하였습니다.
 
-## 📊 발표 자료
+## 토폴로지
+
+![Topology](./docs/topology.png)
+
+## 발표 자료
 
 - [프로젝트 발표 자료 PDF](on-premise-infra-presentation.pdf)
 
